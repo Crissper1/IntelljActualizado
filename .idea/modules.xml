@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/IntellJActualizado.iml" filepath="$PROJECT_DIR$/.idea/IntellJActualizado.iml" />
-      <module fileurl="file://$PROJECT_DIR$/NotasFinal/NotasFinal.iml" filepath="$PROJECT_DIR$/NotasFinal/NotasFinal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Progrmacion R2.iml" filepath="$PROJECT_DIR$/.idea/Progrmacion R2.iml" />
     </modules>
   </component>
 </project>

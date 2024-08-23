@@ -7,13 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Almacen" />
-        <module name="Pintare" />
-        <module name="NotaFinal" />
-        <module name="Notas (1)" />
-        <module name="pruebas2 (1)" />
-        <module name="textFild (1)" />
-        <module name="Swing1 (1)" />
-        <module name="Pintare (1)" />
       </profile>
     </annotationProcessing>
   </component>
