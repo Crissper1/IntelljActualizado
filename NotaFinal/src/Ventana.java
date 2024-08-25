@@ -74,7 +74,7 @@ public class Ventana {
                 //Asigna el modelo a la lista
                 listAgregados.setModel(ListAgre);
 
-                //Suma a la variable totalAgregados
+                //Suma a la variable totalAg
                 totalAgregados++;
 
                 //If para validar que los campos no esten vacios y que la cedula sea un numero
