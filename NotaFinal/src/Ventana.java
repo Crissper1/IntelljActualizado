@@ -35,27 +35,31 @@ public class Ventana {
             setVisible(true);
         }
     }
-        //Crear el JFrame
+        //Define los DefaultListModel
         DefaultListModel<String> ListAgre = new DefaultListModel<>();
         DefaultListModel<String> ListExamen = new DefaultListModel<>();
         DefaultListModel<String> ListExonera = new DefaultListModel<>();
 
+        //Variable para contar los elementos agregados
+        public int totalAgregados = 0;
 
-    public void contadores(){
-        labelTotAgrega.setText(String.valueOf(ListAgre.size() + ListExamen.size() + ListExonera.size()));
 
-        if (Integer.parseInt(String.valueOf(ListExonera.size())) != 0){
+    public void contadores() {
 
-            labelPorceExonera.setText((ListExonera.size() * 100) / (Integer.parseInt(String.valueOf(labelTotAgrega.getText())))+ "%");
-        }else {
+        labelTotAgrega.setText(String.valueOf(ListExamen.size()+ListExonera.size()));
+
+        if (!ListExonera.isEmpty()) {
+            labelPorceExonera.setText((ListExonera.size() * 100) / totalAgregados + "%");
+        } else {
             labelPorceExonera.setText("0%");
         }
-         if (Integer.parseInt(String.valueOf(ListExamen.size())) != 0){
-            labelPorcenExamen.setText((ListExamen.size() * 100) / (Integer.parseInt(String.valueOf(labelTotAgrega.getText())))+ "%");
-        }
-        else {
+
+        if (!ListExamen.isEmpty()) {
+            labelPorcenExamen.setText((ListExamen.size() * 100) / totalAgregados + "%");
+        } else {
             labelPorcenExamen.setText("0%");
         }
+        labelTotAgrega.setText(String.valueOf(totalAgregados));
         labelTotalExone.setText(String.valueOf(ListExonera.size()));
         labelTotExamen.setText(String.valueOf(ListExamen.size()));
     }
@@ -67,21 +71,30 @@ public class Ventana {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                //Asigna el modelo a la lista
                 listAgregados.setModel(ListAgre);
-                //If para validar que los campos no esten vacios
+
+                //Suma a la variable totalAgregados
+                totalAgregados++;
+
+                //If para validar que los campos no esten vacios y que la cedula sea un numero
                 if (textFieldNom.getText().isEmpty() || textFieldApe.getText().isEmpty() || textFieldCi.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor llene todos los campos");
-                    return;
                 }else {
-                    String nombre = textFieldNom.getText();
-                    String apellido = textFieldApe.getText();
-                    int ci = Integer.parseInt(textFieldCi.getText());
-                    String texto = String.format(" %d - %s - %s ", ci, apellido, nombre);
-                    ListAgre.addElement(texto);
-                    contadores();
-                    textFieldNom.setText("");
-                    textFieldApe.setText("");
-                    textFieldCi.setText("");
+                    try {
+                        int ci = Integer.parseInt(textFieldCi.getText());
+                        String nombre = textFieldNom.getText();
+                        String apellido = textFieldApe.getText();
+                        String texto = String.format(" %d - %s - %s ", ci, apellido, nombre);
+                        ListAgre.addElement(texto);
+                        contadores();
+                        textFieldNom.setText("");
+                        textFieldApe.setText("");
+                        textFieldCi.setText("");
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "La cedula debe ser un numero");
+                    }
+
                 }
             }
         });
@@ -97,9 +110,10 @@ public class Ventana {
                 ListExonera.removeAllElements();
                 labelTotAgrega.setText("0");
                 labelTotalExone.setText("0");
-                labelPorceExonera.setText("0");
+                labelPorceExonera.setText("0 %");
                 labelTotExamen.setText("0");
-                labelPorcenExamen.setText("0");
+                labelPorcenExamen.setText("0 %");
+                totalAgregados = 0;
             }
         });
 
@@ -108,6 +122,7 @@ public class Ventana {
             public void actionPerformed(ActionEvent e) {
                 if (listAgregados.getSelectedIndex() != -1) {
                     ListAgre.remove(listAgregados.getSelectedIndex());
+                    totalAgregados--;
                 }
                 contadores();
             }
@@ -128,14 +143,18 @@ public class Ventana {
                     String nombre = datos[2].trim();
                     int nota = Integer.parseInt(textFielNota.getText());
                     Estudiantes estudiante = new Estudiantes(ci, nombre, apellido, 0, nota);
-                    if (Estudiantes.verificarNota()) {
+                    if (estudiante.verificarNota()) {
                         ListExonera.addElement(ListAgre.get(index));
                     } else {
                         ListExamen.addElement(ListAgre.get(index));
                     }
+
                     contadores();
                     ListAgre.remove(index);
                     textFielNota.setText("");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione un estudiante");
                 }
             }
 
