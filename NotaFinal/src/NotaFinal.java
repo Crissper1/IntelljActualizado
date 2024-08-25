@@ -7,7 +7,7 @@ public class NotaFinal {
         String nombre = JOptionPane.showInputDialog("Ingrese su nombre");
         String apellido = JOptionPane.showInputDialog("Ingrese su apellido");
         int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese su edad"));
-        Estudiantes estudiante = new Estudiantes(ci, nombre, apellido, edad);
+        Estudiantes estudiante = new Estudiantes(ci, nombre, apellido, edad , 0);
         JOptionPane.showMessageDialog(null, estudiante.mostrar());
         if (estudiante.esMayorEdad()) {
             JOptionPane.showMessageDialog(null, "Es mayor de edad");
