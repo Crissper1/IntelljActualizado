@@ -2,9 +2,6 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-
-
-
         //Pruebas
         int cod = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el codigo del producto"));
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre del producto");
