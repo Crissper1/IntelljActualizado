@@ -33,17 +33,26 @@ public class miVentana {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Agrega el texto del textField a la lista solo numero y no vacios
-                String nom = textFieldNom.getText();
-                int cantidad = Integer.parseInt(textFieldCant.getText());
-                if (cantidad > 0 && !nom.isEmpty()) {
-                    cosas c = new cosas(nom, cantidad);
-                    camping.addElement(c.mostrar(nom, cantidad));
-                    listCosas.setModel(camping);
-                    textFieldNom.setText("");
-                    textFieldCant.setText("");
-                }else {
-                    JOptionPane.showMessageDialog(null, "Ingrese un valor valido");
-                }
+
+                try {
+    String nom = textFieldNom.getText();
+    int cantidad = Integer.parseInt(textFieldCant.getText());
+    if (cantidad > 0 && !nom.isEmpty()) {
+        cosas c = new cosas(nom, cantidad);
+        camping.addElement(c.mostrar(nom, cantidad));
+        listCosas.setModel(camping);
+        textFieldNom.setText("");
+        textFieldCant.setText("");
+    } else {
+        JOptionPane.showMessageDialog(null, "Ingrese un valor valido");
+    }
+    contadTotaCamping++;
+    labelTotal.setText(String.valueOf(contadTotaCamping));
+} catch (NumberFormatException ex) {
+    JOptionPane.showMessageDialog(null, "Ingrese un número válido");
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(null, "Ocurrió un error: " + ex.getMessage());
+}
                 contadTotaCamping++;
                 labelTotal.setText(String.valueOf(contadTotaCamping));
 
@@ -56,14 +65,19 @@ public class miVentana {
             public void actionPerformed(ActionEvent e) {
                 //Boarra un elemneto seleccionado de listGuarda y lo restaura a la lista de camping
                 if (listGuarda.getSelectedIndex() != -1) {
-                    String[] parts = ((String) listCosas.getSelectedValue()).split("-");
-                    String nom = parts[0];
-                    int cantidad = Integer.parseInt(parts[1]);
-                    cosas c = new cosas(nom, cantidad);
-                    camping.addElement(c.mostrar(nom, cantidad));
-                    listCosas.setModel(camping);
-                    cosasGuardadas.remove(listGuarda.getSelectedIndex());
-                    listGuarda.setModel(cosasGuardadas);
+                    Object selectedValue = listGuarda.getSelectedValue();
+                    if (selectedValue != null) {
+                        String[] parts = ((String) selectedValue).split("-");
+                        String nom = parts[0];
+                        int cantidad = Integer.parseInt(parts[1]);
+                        cosas c = new cosas(nom, cantidad);
+                        camping.addElement(c.mostrar(nom, cantidad));
+                        listCosas.setModel(camping);
+                        cosasGuardadas.remove(listGuarda.getSelectedIndex());
+                        listGuarda.setModel(cosasGuardadas);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Seleccione un elemento válido de la lista de cosas.");
+                    }
                 }
             }
         });

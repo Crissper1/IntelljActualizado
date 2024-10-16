@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ventana {
+public class ventanaLogin extends ventanaBase {
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JButton cancelarButton;
@@ -13,14 +13,11 @@ public class ventana {
 
 
 
+    public ventanaLogin() {
+
+        super("Inicio de sesión");
 
 
-    public ventana() {
-        JFrame frame = new JFrame("ventana");
-        frame.setContentPane(this.Jpanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
         enviarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,3 +68,4 @@ public class ventana {
         });
     }
 }
+
