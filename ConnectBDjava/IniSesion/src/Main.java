@@ -2,10 +2,9 @@ public class Main {
 
 
     public static void main(String[] args) {
-        // Create a new instance of ventanaLogin
-        ventanaLogin ventana = new ventanaLogin();
-        // Show the window
-        ventana.mostrarVentana();
+        // Create a new instance of ventana
+        ventanaLogin Login = new ventanaLogin();
+        Login.mostrarVentana();
 
 
     }
