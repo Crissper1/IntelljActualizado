@@ -9,5 +9,11 @@ public class ventanaMensaje extends ventanaBase {
 
     public ventanaMensaje(String titulo) {
         super("Mensaje");
+
+        // Agregar el panel generado por el editor de componentes de IntelliJ al frame
+        frame.setContentPane(JpanelMensaje);
+
+
     }
+
 }

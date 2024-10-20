@@ -10,15 +10,32 @@ import java.sql.SQLException;
     private JPasswordField passwordField1;
     private JButton loginButton;
     private JButton cancelarButton;
+     private JButton mensajesButton;
 
-    // Constructor
+
+
+     // Constructor
     public ventanaLogin() {
         super("Login");
 
         // Agregar el panel generado por el editor de componentes de IntelliJ al frame
         frame.setContentPane(JpanelLogin);
 
+
+
         // Acciones de los botones
+        mensajesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Crear instancia de ventanaMensaje
+                ventanaMensaje ventanaMensaje = new ventanaMensaje("Mensaje");
+                // Abrir la ventana
+                WindowManager.getInstance().openWindow(ventanaMensaje.getFrame());
+
+
+
+            }
+        });
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,5 +68,6 @@ import java.sql.SQLException;
                 System.exit(0); // Salir del programa
             }
         });
+
     }
 }
