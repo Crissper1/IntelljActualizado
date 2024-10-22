@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class BaseDeDatos {
     //parámetros para la conexión: final = una constante
-    private final String url = "jdbc:mysql://localhost:3306/login";
+    private final String url = "jdbc:mysql://localhost:3306/mibase";
     private final String usuario = "root";
     private final String contra = "";
 

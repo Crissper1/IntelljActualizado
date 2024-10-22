@@ -21,21 +21,6 @@ import java.sql.SQLException;
         // Agregar el panel generado por el editor de componentes de IntelliJ al frame
         frame.setContentPane(JpanelLogin);
 
-
-
-        // Acciones de los botones
-        mensajesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Crear instancia de ventanaMensaje
-                ventanaMensaje ventanaMensaje = new ventanaMensaje("Mensaje");
-                // Abrir la ventana
-                WindowManager.getInstance().openWindow(ventanaMensaje.getFrame());
-
-
-
-            }
-        });
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,7 +37,11 @@ import java.sql.SQLException;
                     bd.ejecutarSQL(ps);
 
                     if (bd.getResultado().next()) {
-                        JOptionPane.showMessageDialog(null, "Bienvenido " + bd.getResultado().getString("nombre"));
+                        String nombreUsuario = bd.getResultado().getString("nombre");
+                        JOptionPane.showMessageDialog(null, "Bienvenido " + nombreUsuario);
+                        // Llamar a ventanaMensaje pasando el nombre del usuario
+                        ventanaMensaje mensaje = new ventanaMensaje(nombreUsuario);
+                        WindowManager.getInstance().openWindow(mensaje.getFrame());
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
                     }

@@ -7,13 +7,19 @@ public class ventanaMensaje extends ventanaBase {
     private JButton enviarButton;
     private JPanel JpanelMensaje;
 
-    public ventanaMensaje(String titulo) {
+    // Constructor que recibe el nombre de usuario
+    public ventanaMensaje(String nombreUsuario) {
         super("Mensaje");
 
-        // Agregar el panel generado por el editor de componentes de IntelliJ al frame
+        // Configuración del frame
         frame.setContentPane(JpanelMensaje);
 
-
+        // Establecer el nombre del usuario en la etiqueta aId
+        aId.setText(nombreUsuario);
     }
 
+    // Método para obtener el frame
+    public JFrame getFrame() {
+        return frame;
+    }
 }
